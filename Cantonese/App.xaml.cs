@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 namespace Cantonese
 {
-    //This is a Branch
+    //I have already learnt how to use github
     /// <summary>
     /// 提供特定于应用程序的行为，以补充默认的应用程序类。
     /// </summary>

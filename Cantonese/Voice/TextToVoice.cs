@@ -22,7 +22,6 @@ namespace Cantonese.Voice
         private Timer accessTokenRenewer;
         private Stream Music;
         //private AccessTokenInfo PrivateAccessToken;
-
         private const int RefreshTokenDuration = 9;
 
         //获取accesstoken

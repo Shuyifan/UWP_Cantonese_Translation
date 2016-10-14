@@ -37,9 +37,6 @@ namespace Cantonese
     public sealed partial class Translation : Page
     {
         LanguageModel TranslationMode;
-        TranslationResult TranslationInfo;
-        string AppID = "20160607000022870";
-        string AppKey = "Lki1IKW05LpLiuy3qNs8";
         bool VoiceRecordSym;
 
         //判断所选择的翻译前的语言和翻译后的语言
@@ -54,34 +51,12 @@ namespace Cantonese
         
         //粤语与中文互换
         //调用百度翻译api
-        private async void TranslationButton_Click(object sender, RoutedEventArgs e)
+        private void TranslationButton_Click(object sender, RoutedEventArgs e)
         {
-            TranslationInfo = new TranslationResult();
-            string url = "";
             HttpClient client = new HttpClient();
-            TranslationInfo.src = Input.Text;
             if (!string.IsNullOrEmpty(Input.Text))
             {
-                Random ran = new Random();
-                int temp = ran.Next();
-                string Enter = Input.Text.Replace("\r\n", "###换行符###");
-                string tempString1 = get_uft8(Enter), tempString2 = temp.ToString();
-                string sign = AppID + tempString1 + tempString2 + AppKey;
-                sign = ComputeMD5(sign);
-                url = string.Format("http://api.fanyi.baidu.com/api/trans/vip/translate?q={0}&from={1}&to={2}&appid={3}&salt={4}&sign={5}"
-                    , UrlEncode(tempString1)
-                    , TranslationMode.From
-                    , TranslationMode.To
-                    , AppID
-                    , tempString2
-                    , sign);
-                var response = await client.GetByteArrayAsync(url);
-                string result = Encoding.UTF8.GetString(response);
-                StringReader sr = new StringReader(result);
-                JsonTextReader jsonReader = new JsonTextReader(sr);
-                JsonSerializer serializer = new JsonSerializer();
-                var r = serializer.Deserialize<LanguageModel>(jsonReader);
-                Output.Text = r.Trans_result[0].dst.Replace("###换行符###", "\r\n").Replace("###换走符###", "\r\n");
+                Output.Text = Voice.Translation.Translate(Input.Text, TranslationMode).Result;
             }
         }
 
@@ -96,38 +71,6 @@ namespace Cantonese
             temp = Output.Text;
             Output.Text = Input.Text;
             Input.Text = temp;
-        }
-
-        //MD5加密
-        private static string ComputeMD5(string str)
-        {
-            var alg = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5);
-            IBuffer buff = CryptographicBuffer.ConvertStringToBinary(str, BinaryStringEncoding.Utf8);
-            var hashed = alg.HashData(buff);
-            var res = CryptographicBuffer.EncodeToHexString(hashed);
-            return res;
-        }
-
-        //对文本进行UTF8编码
-        private static string get_uft8(string unicodeString)
-        {
-            UTF8Encoding utf8 = new UTF8Encoding();
-            Byte[] encodedBytes = utf8.GetBytes(unicodeString);
-            String decodedString = utf8.GetString(encodedBytes);
-            return decodedString;
-        }
-
-        //URI解码
-        public static string UrlEncode(string str)
-        {
-            StringBuilder sb = new StringBuilder();
-            byte[] byStr = System.Text.Encoding.UTF8.GetBytes(str); //默认是System.Text.Encoding.Default.GetBytes(str)
-            for (int i = 0; i < byStr.Length; i++)
-            {
-                sb.Append(@"%" + Convert.ToString(byStr[i], 16));
-            }
-
-            return (sb.ToString());
         }
 
         //判断转语音按钮的可见性

@@ -119,6 +119,7 @@
       <DependentUpon>Translation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Voice\TextToVoice.cs" />
+    <Compile Include="Voice\Translation.cs" />
     <Compile Include="Voice\VoiceRecorder.cs" />
     <Compile Include="Voice\VoiceToText.cs" />
   </ItemGroup>

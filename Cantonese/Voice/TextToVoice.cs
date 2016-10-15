@@ -25,10 +25,10 @@ namespace Cantonese.Voice
         private const int RefreshTokenDuration = 9;
 
         //获取accesstoken
-        private void Authentication()
+        async private Task Authentication()
         {
 
-            token = RequestTokenAsync().Result;
+            token = await RequestTokenAsync();
 
             accessTokenRenewer = new Timer(new TimerCallback(OnTokenExpiredCallback),
                                this,
@@ -107,9 +107,9 @@ namespace Cantonese.Voice
         }
 
         //读取文本
-        public Stream ReadText(string Word)
+        public async Task<Stream> ReadText(string Word)
         {
-            Authentication();
+            await Task.Run(Authentication);
             string requestUri = "https://speech.platform.bing.com/synthesize";
             var cortana = new Synthesize(new Synthesize.InputOptions()
             {

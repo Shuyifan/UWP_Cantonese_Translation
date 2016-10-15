@@ -86,7 +86,7 @@ namespace Cantonese
         private async void Voice_Click(object sender, RoutedEventArgs e)
         {
             TextToVoice temp = new TextToVoice();
-            Stream voice = temp.ReadText(Input.Text);
+            Stream voice = await temp.ReadText(Input.Text);
             InMemoryRandomAccessStream ras = new InMemoryRandomAccessStream();
             await voice.CopyToAsync(ras.AsStreamForWrite());
             await ras.FlushAsync();
@@ -96,7 +96,6 @@ namespace Cantonese
 
         private void VoiceCaptureButton_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }

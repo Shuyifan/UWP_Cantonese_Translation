@@ -26,6 +26,7 @@ using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage;
 using Windows.ApplicationModel;
+using System.Threading.Tasks;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
 
@@ -51,12 +52,12 @@ namespace Cantonese
         
         //粤语与中文互换
         //调用百度翻译api
-        private void TranslationButton_Click(object sender, RoutedEventArgs e)
+        async private void TranslationButton_Click(object sender, RoutedEventArgs e)
         {
-            HttpClient client = new HttpClient();
             if (!string.IsNullOrEmpty(Input.Text))
             {
-                Output.Text = Voice.Translation.Translate(Input.Text, TranslationMode).Result;
+                string tempTest = await Voice.Translation.Translate(Input.Text, TranslationMode);
+                Output.Text =tempTest;
             }
         }
 

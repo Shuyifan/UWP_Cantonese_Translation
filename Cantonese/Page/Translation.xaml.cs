@@ -129,7 +129,7 @@ namespace Cantonese
                     tempStream.CopyTo(stream);
                     VoiceToText voiceToText = new VoiceToText();
                     //传入VoiceToText函数
-                    output = voiceToText.ReadVoice(stream, TranslationMode.From).Result;
+                    output = await voiceToText.ReadVoice(stream, TranslationMode.From);
                 }
                 //tempStream.Position = 0;
                 Input.Text = output;

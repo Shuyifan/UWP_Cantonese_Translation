@@ -54,10 +54,15 @@ namespace Cantonese
         //调用百度翻译api
         async private void TranslationButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(Input.Text))
+            if(Input.Text.Length > 0)
             {
-                string tempTest = await Voice.Translation.Translate(Input.Text, TranslationMode);
-                Output.Text =tempTest;
+                ProgessBar.Visibility = Visibility.Visible;
+                if (!string.IsNullOrEmpty(Input.Text))
+                {
+                    string tempTest = await Voice.Translation.Translate(Input.Text, TranslationMode);
+                    Output.Text = tempTest;
+                    ProgessBar.Visibility = Visibility.Collapsed;
+                }
             }
         }
 

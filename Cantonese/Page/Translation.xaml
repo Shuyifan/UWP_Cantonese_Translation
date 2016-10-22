@@ -54,6 +54,14 @@
                   Background="#FFEEEEEE"/>
         </RelativePanel>
         <RelativePanel Grid.Row="1">
+            <ProgressBar Name="ProgessBar"
+                         IsIndeterminate="True"
+                         Height="20"
+                         Width="200"
+                         RelativePanel.AlignVerticalCenterWithPanel="True"
+                         RelativePanel.AlignRightWithPanel="True"
+                         Margin="0,0,20,0"
+                         Visibility="Collapsed"/>
             <Button Name="SwitchButton"
                     Background="{x:Null}"
                     RelativePanel.AlignLeftWithPanel="True"

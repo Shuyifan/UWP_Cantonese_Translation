@@ -125,7 +125,8 @@ namespace Cantonese
             {
                 await _mediaCapture.StopRecordAsync();
                 IsRecording = false;
-                VoiceCaptureButton.Content = "语音识别";
+                VoiceCaptureButton.FontFamily = new FontFamily("Segoe MDL2 Assets");
+                VoiceCaptureButton.Content = "&#xE1D6;";
                 VoiceRecordSym = true;
                 //转换InMemoryRandomAccessStream成Stream
                 Stream tempStream = WindowsRuntimeStreamExtensions.AsStreamForRead(_memoryBuffer.GetInputStreamAt(0));

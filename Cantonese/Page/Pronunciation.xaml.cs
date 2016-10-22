@@ -7,6 +7,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Capture;
+using Windows.Media.MediaProperties;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
@@ -27,11 +29,13 @@ namespace Cantonese
     public sealed partial class Pronunciation : Page
     {
         Dictionary<string, string> Dictionary;
+        bool VoiceRecordSym;
 
         public Pronunciation()
         {
             this.InitializeComponent();
             Init();
+            VoiceRecordSym = true;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -94,8 +98,53 @@ namespace Cantonese
             MyMediaPlayer.SetSource(ras, "");
         }
 
-        private void VoiceCaptureButton_Click(object sender, RoutedEventArgs e)
+        //语音录入
+        private MediaCapture _mediaCapture;
+        private InMemoryRandomAccessStream _memoryBuffer = new InMemoryRandomAccessStream();
+        public bool IsRecording { get; set; }
+        private async void VoiceCaptureButton_Click(object sender, RoutedEventArgs e)
         {
+            string output;
+            //开始录音
+            if (VoiceRecordSym == true)
+            {
+                _memoryBuffer = new InMemoryRandomAccessStream();
+                VoiceCaptureButton.Content = "停止录音";
+                VoiceRecordSym = false;
+                if (IsRecording)
+                {
+                    throw new InvalidOperationException("Recording already in progress!");
+                }
+                MediaCaptureInitializationSettings settings =
+                  new MediaCaptureInitializationSettings
+                  {
+                      StreamingCaptureMode = StreamingCaptureMode.Audio
+                  };
+                _mediaCapture = new MediaCapture();
+                await _mediaCapture.InitializeAsync(settings);
+                //将录音文件存入_memoryBuffer里面
+                await _mediaCapture.StartRecordToStreamAsync(MediaEncodingProfile.CreateWav(AudioEncodingQuality.Auto), _memoryBuffer);
+                IsRecording = true;
+            }
+            //停止录音
+            else
+            {
+                await _mediaCapture.StopRecordAsync();
+                IsRecording = false;
+                VoiceCaptureButton.Content = "&#xE1D6;";
+                VoiceRecordSym = true;
+                //转换InMemoryRandomAccessStream成Stream
+                Stream tempStream = WindowsRuntimeStreamExtensions.AsStreamForRead(_memoryBuffer.GetInputStreamAt(0));
+                using (var stream = new MemoryStream())
+                {
+                    tempStream.CopyTo(stream);
+                    VoiceToText voiceToText = new VoiceToText();
+                    //传入VoiceToText函数
+                    output = await voiceToText.ReadVoice(stream, "yue");
+                }
+                //tempStream.Position = 0;
+                Input.Text = output;
+            }
         }
     }
 }

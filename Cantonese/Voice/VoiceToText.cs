@@ -34,7 +34,6 @@ namespace Cantonese.Voice
                                this,
                                TimeSpan.FromMinutes(RefreshTokenDuration),
                                TimeSpan.FromMilliseconds(-1));
-
         }
 
         //发送授权uri，获取response

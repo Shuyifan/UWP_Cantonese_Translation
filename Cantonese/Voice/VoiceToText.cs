@@ -25,10 +25,10 @@ namespace Cantonese.Voice
         private const int RefreshTokenDuration = 9;
 
         //Access Token获取授权
-        private void Authentication()
+        private async Task Authentication()
         {
 
-            token = RequestTokenAsync().Result;
+            token = await RequestTokenAsync();
 
             accessTokenRenewer = new Timer(new TimerCallback(OnTokenExpiredCallback),
                                this,
@@ -110,7 +110,7 @@ namespace Cantonese.Voice
         public async Task<string> ReadVoice(Stream input, string InputLanguage)
         {
             string headerValue;
-            Authentication();//获取accesstoken
+            await Task.Run(Authentication);//获取accesstoken
             string requestUri = "https://speech.platform.bing.com/recognize";
             requestUri += @"?scenarios=smd";                                  // websearch is the other main option.
             requestUri += @"&appid=D4D52672-91D7-4C74-8AD8-42B1D98141A5";     // You must use this ID.
@@ -192,12 +192,19 @@ namespace Cantonese.Voice
                 ex.GetType();
             }
             //jason反解析
-            StringReader steamreader = new StringReader(responseString);
-            JsonTextReader jsonReader = new JsonTextReader(steamreader);
-            
-            JsonSerializer serializer = new JsonSerializer();
-            var r = serializer.Deserialize<Result>(jsonReader);
-            return r.results[0].lexical;
+            try
+            {
+                StringReader steamreader = new StringReader(responseString);
+                JsonTextReader jsonReader = new JsonTextReader(steamreader);
+                JsonSerializer serializer = new JsonSerializer();
+                var r = serializer.Deserialize<Result>(jsonReader);
+                return r.results[0].lexical;
+            }
+            catch (Exception ex)
+            {
+                ex.GetType();
+                return "";
+            }
         }
 
     }

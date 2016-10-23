@@ -103,6 +103,7 @@ namespace Cantonese
             if (VoiceRecordSym==true)
             {
                 _memoryBuffer = new InMemoryRandomAccessStream();
+                VoiceCaptureButton.FontFamily = new FontFamily("Segoe UI");
                 VoiceCaptureButton.Content = "停止录音";
                 VoiceRecordSym = false;
                 if (IsRecording)
@@ -126,7 +127,7 @@ namespace Cantonese
                 await _mediaCapture.StopRecordAsync();
                 IsRecording = false;
                 VoiceCaptureButton.FontFamily = new FontFamily("Segoe MDL2 Assets");
-                VoiceCaptureButton.Content = "&#xE1D6;";
+                VoiceCaptureButton.Content = "\xE1D6";
                 VoiceRecordSym = true;
                 //转换InMemoryRandomAccessStream成Stream
                 Stream tempStream = WindowsRuntimeStreamExtensions.AsStreamForRead(_memoryBuffer.GetInputStreamAt(0));
@@ -138,7 +139,7 @@ namespace Cantonese
                     output = await voiceToText.ReadVoice(stream, TranslationMode.From);
                 }
                 //tempStream.Position = 0;
-                Input.Text = output;
+                Input.Text += output;
             }
         }
     }

@@ -194,6 +194,7 @@ namespace Cantonese.Voice
             //jason反解析
             StringReader steamreader = new StringReader(responseString);
             JsonTextReader jsonReader = new JsonTextReader(steamreader);
+            
             JsonSerializer serializer = new JsonSerializer();
             var r = serializer.Deserialize<Result>(jsonReader);
             return r.results[0].lexical;

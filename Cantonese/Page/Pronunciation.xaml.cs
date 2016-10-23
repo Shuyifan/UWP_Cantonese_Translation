@@ -135,6 +135,8 @@ namespace Cantonese
                 VoiceCaptureButton.FontFamily = new FontFamily("Segoe MDL2 Assets");
                 VoiceCaptureButton.Content = "\xE1D6";
                 VoiceRecordSym = true;
+                progessRing.IsActive = true;
+                Input.IsReadOnly = true;
                 //转换InMemoryRandomAccessStream成Stream
                 Stream tempStream = WindowsRuntimeStreamExtensions.AsStreamForRead(_memoryBuffer.GetInputStreamAt(0));
                 using (var stream = new MemoryStream())
@@ -145,6 +147,8 @@ namespace Cantonese
                     output = await voiceToText.ReadVoice(stream, "yue");
                 }
                 //tempStream.Position = 0;
+                progessRing.IsActive = false;
+                Input.IsReadOnly = false;
                 Input.Text += output;
             }
         }

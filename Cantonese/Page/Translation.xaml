@@ -47,6 +47,13 @@
                            FontSize="20" 
                            TextAlignment="Center"/>
             </Grid>
+            <ProgressRing Name="progessRing"
+                          IsActive="False"
+                          RelativePanel.AlignHorizontalCenterWithPanel="True"
+                          RelativePanel.AlignVerticalCenterWithPanel="True"
+                          Margin="0,0,50,0"
+                          Width="50"
+                          Height="50"/>
             <Grid RelativePanel.RightOf="Original"
                   RelativePanel.AlignRightWithPanel="True"
                   RelativePanel.AlignTopWithPanel="True"

@@ -131,7 +131,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Dictionary.txt" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Init Screeb\SplashScreen.scale-100.png" />
+    <Content Include="Assets\Init Screeb\SplashScreen.scale-125.png" />
+    <Content Include="Assets\Init Screeb\SplashScreen.scale-150.png" />
+    <Content Include="Assets\Init Screeb\SplashScreen.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\Init Screeb\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Store Logo\Store_Loge 200x200.scale-100.jpg" />
+    <Content Include="Assets\Store Logo\Store_Loge 200x200.scale-125.jpg" />
+    <Content Include="Assets\Store Logo\Store_Loge 200x200.scale-150.jpg" />
+    <Content Include="Assets\Store Logo\Store_Loge 200x200.scale-200.jpg" />
+    <Content Include="Assets\Store Logo\Store_Loge 200x200.scale-400.jpg" />
+    <Content Include="Assets\Store Logo\Store_Loge 80x80.jpg" />
+    <Content Include="Assets\Store Logo\Store_Logo 100x100.jpg" />
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

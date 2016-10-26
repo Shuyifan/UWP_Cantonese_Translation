@@ -142,12 +142,7 @@
     <Content Include="Assets\Init Screeb\SplashScreen.scale-100.png" />
     <Content Include="Assets\Init Screeb\SplashScreen.scale-125.png" />
     <Content Include="Assets\Init Screeb\SplashScreen.scale-150.png" />
-    <Content Include="Assets\Init Screeb\SplashScreen.scale-400.png" />
     <Content Include="Assets\SplashScreen.png" />
-    <Content Include="Assets\SplashScreen.scale-100.png" />
-    <Content Include="Assets\SplashScreen.scale-125.png" />
-    <Content Include="Assets\SplashScreen.scale-150.png" />
-    <Content Include="Assets\Init Screeb\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square310x310Logo.scale-100.png" />
     <Content Include="Assets\Store Logo\Store_Loge 200x200.scale-100.jpg" />
     <Content Include="Assets\Store Logo\Store_Loge 200x200.scale-125.jpg" />

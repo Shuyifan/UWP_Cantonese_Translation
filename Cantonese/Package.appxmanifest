@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="58755EvanShu.61694DDC4D582" Publisher="CN=12AAC69D-28BF-4307-89B0-3AD7DD2554F6" Version="1.1.14.0" />
+  <Identity Name="58755EvanShu.61694DDC4D582" Publisher="CN=12AAC69D-28BF-4307-89B0-3AD7DD2554F6" Version="1.1.1.0" />
   <mp:PhoneIdentity PhoneProductId="8c986fb2-ac8a-43dc-86ce-6e0bf51dc831" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>粤语翻译</DisplayName>
